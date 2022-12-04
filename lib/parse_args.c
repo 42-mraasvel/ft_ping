@@ -84,7 +84,7 @@ static Result parse_option(const char* option, Arguments* args, ArgumentIterator
 	while (*option != '\0') {
 		int ch = (unsigned char)*option;
 		if (parsers[ch] == NULL) {
-			char* message = cstr_format("invalid option -- %c", ch);
+			char* message = malloc_check(cstr_format("invalid option -- %c", ch));
 			return result_owned(InvalidArgument, message);
 		}
 		Result r = (parsers[ch])(&option, args, it);
